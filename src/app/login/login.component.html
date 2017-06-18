@@ -1,0 +1,68 @@
+<div id="myModal" class="modal fade" role="dialog" bsModal #staticModal="bs-modal">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Login Failed</h4>
+      </div>
+      <div class="modal-body">
+        <p>Login failed.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="staticModal.hide()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="col-xs-12 col-sm-push-3 col-sm-6">
+  <h1 className="page-header">Login</h1>
+  <form #loginForm="ngForm" (ngSubmit)="login()">
+    <div class="row">
+      <div class="col-xs-12">
+        <app-extended-input [labelText]="'Email'">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" [(ngModel)]="email"
+                 #emailInput="ngModel" required>
+        </app-extended-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <app-extended-input [labelText]="'Password'">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" [(ngModel)]="password"
+                 #passwordModel="ngModel" required>
+        </app-extended-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="checkbox" [(ngModel)]="isActive" name="active"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-right">
+        <button class="btn btn-primary" type="submit">
+          Login
+        </button>
+      </div>
+    </div>
+    <pre>
+
+loginForm.submitted: {{loginForm.submitted}}
+passwordModel.controls: {{passwordModel.controls}}
+passwordModel.valid:  {{passwordModel.valid}}
+passwordModel.touched:  {{passwordModel.touched}}
+passwordModel.dirty:  {{passwordModel.dirty}}
+passwordModel.model:  {{passwordModel.model}}
+passwordModel.invalid:  {{passwordModel.invalid}}
+passwordModel.errors:  {{passwordModel.errors | json}}
+passwordModel.hasError('required'):  {{passwordModel.hasError('required')}}
+!((loginForm.submitted || passwordModel.touched) && passwordModel.errors && passwordModel.errors.required) = {{!((loginForm.submitted || passwordModel.touched) && passwordModel.errors && passwordModel.errors.required)}}
+
+    </pre>
+  </form>
+</div>
+
+

@@ -1,0 +1,9 @@
+<div class="form-group"
+     [ngClass]="{'has-error': (anNgModel.formDirective.submitted || anNgModel.touched) && anNgModel.invalid}">
+  <label class="control-label">{{labelText}}</label>
+  <ng-content select="input"></ng-content>
+  <div class="help-block"
+       [hidden]="!((anNgModel.formDirective.submitted || anNgModel.touched) && anNgModel.errors && anNgModel.errors.required)">
+    <span>This Field is mandatory</span>
+  </div>
+</div>
