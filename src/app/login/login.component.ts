@@ -4,6 +4,7 @@ import 'rxjs/add/operator/takeWhile'
 import {Router} from "@angular/router";
 import {ModalDirective} from "ngx-bootstrap";
 import {LoginService} from "../login.service";
+import {Observable} from 'rxjs'
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   private password: string;
 
   private isMounted: boolean;
-
-  private isActive: boolean = true;
 
   @ViewChild(ModalDirective)
   private staticModal: ModalDirective;
@@ -58,13 +57,25 @@ export class LoginComponent implements OnInit, OnDestroy {
   private login(): void {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    this._http.post('/login', {
-      email: this.email,
-      password: this.password
-    }, options).takeWhile(() => this.isActive).subscribe(
+
+    let observable = Observable.create(function(observer) {
+      var result = {ok: true};
+      observer.next(result)
+    });
+
+    observable.takeWhile(() => this.isMounted).subscribe(
       (res) => this.onNextLogin(res),
       (error) => this.onErrorLogin(error)
     );
+
+    /*
+    this._http.post('/login', {
+      email: this.email,
+      password: this.password
+    }, options).takeWhile(() => this.isMounted).subscribe(
+      (res) => this.onNextLogin(res),
+      (error) => this.onErrorLogin(error)
+    );*/
   }
 
 }

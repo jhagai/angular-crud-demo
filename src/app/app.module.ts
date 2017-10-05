@@ -32,7 +32,9 @@ const appRoutes: Routes = [
     JsonpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [LoginService],
+  providers: [LoginService
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

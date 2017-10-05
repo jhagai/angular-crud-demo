@@ -1,24 +1,21 @@
 import {Injectable} from '@angular/core';
-import {Observable, Observer} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 @Injectable()
 export class LoginService {
 
-  private _observable: Observable<boolean>;
-  private _observer: Observer<any>;
+  private _subject: Subject<boolean>;
 
   constructor() {
-    this._observable = Observable.create((observer) => {
-      this._observer = observer;
-    });
+    this._subject = new Subject<boolean>();
   }
 
-  get observable(): Observable<boolean> {
-    return this._observable;
+  get subject(): Observable<boolean> {
+    return this._subject;
   }
 
   set logged(value: boolean) {
-    this._observer.next(value);
+    this._subject.next(value);
   }
 
 }
